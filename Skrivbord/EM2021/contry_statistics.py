@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import resultat
 
 goal_filter = 5 # Om ett lag gjort fler än 5 mål räknas bara 5
+n = 10000 # Antal matcher att simulera
 
 class Team_stats():
     def __init__(self,name):
@@ -63,7 +64,29 @@ add_stats(finland_stats,resultat.finland)
 add_stats(ryssland_stats,resultat.ryssland)
 add_stats(belgien_stats,resultat.belgien)
 
-#results = simulate_games(danmark_stats,finland_stats,1000)
+#%% Grupp C
+österrike_stats = Team_stats('österrike')
+nederländerna_stats = Team_stats('nederländerna')
+nordmakedonien_stats = Team_stats('nordmakedonien')
+ukraina_stats = Team_stats('ukraina')
+
+add_stats(österrike_stats,resultat.österrike)
+add_stats(nederländerna_stats,resultat.nederländerna)
+add_stats(nordmakedonien_stats,resultat.nordmakedonien)
+add_stats(ukraina_stats,resultat.ukraina)
+
+#%% Grupp D
+england_stats = Team_stats('england')
+kroatien_stats = Team_stats('kroatien')
+skottland_stats = Team_stats('skottland')
+tjeckien_stats = Team_stats('tjeckien')
+
+add_stats(england_stats,resultat.england)
+add_stats(kroatien_stats,resultat.kroatien)
+add_stats(skottland_stats,resultat.skottland)
+add_stats(tjeckien_stats,resultat.tjeckien)
+
+
 #%%
 def plot_result_hist(results,team1,team2):
     plt.hist(results[team1],bins=np.arange(max(results[team2])+3)-0.5,alpha=0.75,color='red' ,label=team1)
@@ -72,9 +95,18 @@ def plot_result_hist(results,team1,team2):
     plt.show()
 
 #%%
-bel_rus = simulate_games(belgien_stats,ryssland_stats,10000)
+bel_rus = simulate_games(belgien_stats,ryssland_stats,n)
 plot_result_hist(bel_rus,'belgien','ryssland')
 
+#%%
+eng_kro = simulate_games(england_stats,kroatien_stats,n)
+plot_result_hist(eng_kro,'england','kroatien')
 
+#%%
+öst_nor = simulate_games(österrike_stats,nordmakedonien_stats,n)
+plot_result_hist(öst_nor,'österrike','nordmakedonien')
 
+#%% 
+ned_ukr = simulate_games(nederländerna_stats,ukraina_stats,n)
+plot_result_hist(ned_ukr,'nederländerna','ukraina')
 
